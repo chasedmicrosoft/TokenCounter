@@ -162,9 +162,51 @@ This makes the tool suitable for processing sensitive or confidential informatio
 
 ## Running Tests
 
+The project uses pytest for testing the application functionality. The test suite includes:
+
+### Test Categories
+- **API Tests**: Verify endpoints, authentication, and responses
+- **Token Counter Tests**: Test the core token counting functionality
+- **Performance Tests**: Ensure the application meets performance requirements
+- **Environment Tests**: Validate environment-specific configurations
+
+### Running Tests
+
+Run all tests:
 ```bash
 pytest
 ```
+
+Run specific test files:
+```bash
+pytest tests/test_api.py
+pytest tests/test_token_counter.py
+pytest tests/test_performance.py
+pytest tests/test_env.py
+```
+
+Run tests with verbose output:
+```bash
+pytest -v
+```
+
+### Test Configuration
+
+The test setup includes:
+- `conftest.py`: Configures the Python path for tests
+- `pytest.ini`: Defines test discovery patterns
+- `setup.py`: Makes the package installable for testing
+
+### Troubleshooting Tests
+
+If you encounter authentication errors during testing:
+- Ensure your `.env` file has the correct credentials
+- The tests use environment variables for authentication
+- Run tests from the project root directory
+
+If performance tests are failing:
+- Tests may run slower in CI environments than local development
+- Adjust thresholds in `test_performance.py` if necessary
 
 ## Docker
 
