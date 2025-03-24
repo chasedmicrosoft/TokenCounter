@@ -2,8 +2,12 @@ from fastapi.testclient import TestClient
 import pytest
 import base64
 import os
+from dotenv import load_dotenv
 
 from app.main import app
+
+# Load environment variables for tests
+load_dotenv()
 
 @pytest.fixture
 def test_client():
@@ -12,10 +16,10 @@ def test_client():
 
 @pytest.fixture
 def auth_headers():
-    """Create authentication headers for API requests."""
-    # This would use environment variables in a real test
-    username = "admin"
-    password = "password"
+    """Create authentication headers for API requests using actual env credentials."""
+    # Use the same credentials as the application
+    username = os.getenv("API_USERNAME", "admin")
+    password = os.getenv("API_PASSWORD", "securepassword")
     
     credentials = f"{username}:{password}"
     encoded_credentials = base64.b64encode(credentials.encode()).decode()
